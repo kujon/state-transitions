@@ -52,7 +52,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
@@ -80,9 +80,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-/***/ },
+/***/ }),
 /* 1 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
@@ -122,7 +122,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  function AnimateInOut() {
 	    _classCallCheck(this, AnimateInOut);
 	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(AnimateInOut).apply(this, arguments));
+	    return _possibleConstructorReturn(this, (AnimateInOut.__proto__ || Object.getPrototypeOf(AnimateInOut)).apply(this, arguments));
 	  }
 	
 	  _createClass(AnimateInOut, [{
@@ -157,7 +157,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	        _elementCommunicator2.default.removeListener('animating-from', removeAnimatingElements);
 	
-	        transitionOutElement.remove();
+	        (0, _util.removeNode)(transitionOutElement);
 	      }
 	
 	      transitionOutElement.addEventListener('animationend', animationEnd);
@@ -200,27 +200,27 @@ return /******/ (function(modules) { // webpackBootstrap
 	  animateOutClassName: 'leaving'
 	};
 
-/***/ },
+/***/ }),
 /* 2 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	module.exports = __WEBPACK_EXTERNAL_MODULE_2__;
 
-/***/ },
+/***/ }),
 /* 3 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	module.exports = __WEBPACK_EXTERNAL_MODULE_3__;
 
-/***/ },
+/***/ }),
 /* 4 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	module.exports = __WEBPACK_EXTERNAL_MODULE_4__;
 
-/***/ },
+/***/ }),
 /* 5 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
@@ -235,15 +235,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	exports.default = elementCommunicator;
 
-/***/ },
+/***/ }),
 /* 6 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	module.exports = require("events");
 
-/***/ },
+/***/ }),
 /* 7 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
@@ -253,6 +253,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.requestNextAnimationFrame = requestNextAnimationFrame;
 	exports.createClone = createClone;
 	exports.serializeNode = serializeNode;
+	exports.removeNode = removeNode;
 	
 	var _lodash = __webpack_require__(4);
 	
@@ -265,8 +266,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 	
 	function createClone(_ref) {
-	  var outerHTML = _ref.outerHTML;
-	  var rect = _ref.rect;
+	  var outerHTML = _ref.outerHTML,
+	      rect = _ref.rect;
 	
 	  // Creates a clone that fits exactly in the space that the previous element used
 	  var container = document.createElement('div');
@@ -307,10 +308,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	  return { id: id, rect: rect, outerHTML: outerHTML };
 	}
+	
+	function removeNode(node) {
+	  if ('remove' in Element.prototype) {
+	    node.remove();
+	  } else if (node.parentNode) {
+	    node.parentNode.removeChild(node);
+	  }
+	}
 
-/***/ },
+/***/ }),
 /* 8 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
@@ -350,7 +359,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  function TweenState() {
 	    _classCallCheck(this, TweenState);
 	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(TweenState).apply(this, arguments));
+	    return _possibleConstructorReturn(this, (TweenState.__proto__ || Object.getPrototypeOf(TweenState)).apply(this, arguments));
 	  }
 	
 	  _createClass(TweenState, [{
@@ -398,7 +407,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      // Remove the placeholder element once everything is finished (setTimeout, for the moment, is guaranteed to be finished after the next component is mounted)
 	      setTimeout(function () {
 	        // Called after animations are initialised
-	        placeholderElement.remove();
+	        (0, _util.removeNode)(placeholderElement);
 	      }, 0);
 	    }
 	  }, {
@@ -437,9 +446,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  animateToClassName: 'tween-state-animating tween-state-animating-to'
 	};
 
-/***/ },
+/***/ }),
 /* 9 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	'use strict';
 	
@@ -448,9 +457,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	var OPACITY_MANAGED_BY_TWEEN = exports.OPACITY_MANAGED_BY_TWEEN = 'data-opacity-managed';
 
-/***/ },
+/***/ }),
 /* 10 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
@@ -527,9 +536,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.transitionTo = transitionTo;
 	exports.transitionFrom = transitionFrom;
 
-/***/ },
+/***/ }),
 /* 11 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
@@ -566,19 +575,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	function animateElement(_ref) {
 	  var _fromClone$classList, _toClone$classList;
 	
-	  var toRect = _ref.toRect;
-	  var fromRect = _ref.fromRect;
-	  var originalElement = _ref.originalElement;
-	  var toElement = _ref.toElement;
-	  var fromElement = _ref.fromElement;
-	  var duration = _ref.duration;
-	  var timingFunction = _ref.timingFunction;
-	  var delay = _ref.delay;
-	  var fadeOutDuration = _ref.fadeOutDuration;
-	  var fadeOutTimingFunction = _ref.fadeOutTimingFunction;
-	  var fadeOutDelay = _ref.fadeOutDelay;
-	  var animateFromClassName = _ref.animateFromClassName;
-	  var animateToClassName = _ref.animateToClassName;
+	  var toRect = _ref.toRect,
+	      fromRect = _ref.fromRect,
+	      originalElement = _ref.originalElement,
+	      toElement = _ref.toElement,
+	      fromElement = _ref.fromElement,
+	      duration = _ref.duration,
+	      timingFunction = _ref.timingFunction,
+	      delay = _ref.delay,
+	      fadeOutDuration = _ref.fadeOutDuration,
+	      fadeOutTimingFunction = _ref.fadeOutTimingFunction,
+	      fadeOutDelay = _ref.fadeOutDelay,
+	      animateFromClassName = _ref.animateFromClassName,
+	      animateToClassName = _ref.animateToClassName;
 	
 	  var container = document.createElement('div');
 	
@@ -652,13 +661,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var removeAnimatingToElements = removeAnimatingElements(toClone);
 	  var removeAnimatingFromElements = removeAnimatingElements(fromClone);
 	  var finish = function finish() {
-	    return container.remove();
+	    return (0, _util.removeNode)(container);
 	  };
 	
 	  toClone.addEventListener('transitionend', function fadeOutToElement() {
 	    originalElement.style.opacity = '';
 	    toClone.removeEventListener('transitionend', fadeOutToElement);
-	    fromClone.remove();
+	    (0, _util.removeNode)(fromClone);
 	
 	    if (fadeOutDuration > 0.01) {
 	      // Fade the clone of the original element to the original element in the case that it has updated during the animation (off by default)
@@ -669,7 +678,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        toClone.addEventListener('transitionend', function removeContainer() {
 	          // Probably not needed, best to be safe
 	          toClone.removeEventListener('transitionend', removeContainer);
-	          toClone.remove();
+	          (0, _util.removeNode)(toClone);
 	
 	          _elementCommunicator2.default.removeListener('animating-to', removeAnimatingToElements);
 	          _elementCommunicator2.default.removeListener('animating-from', removeAnimatingFromElements);
@@ -681,7 +690,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      });
 	    } else {
 	      // Remove the clone of the original element, and this animation is complete
-	      toClone.remove();
+	      (0, _util.removeNode)(toClone);
 	      finish();
 	    }
 	  });
@@ -702,9 +711,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 	
 	function resetElement(_ref2) {
-	  var originalElement = _ref2.originalElement;
-	  var toElement = _ref2.toElement;
-	  var fromElement = _ref2.fromElement;
+	  var originalElement = _ref2.originalElement,
+	      toElement = _ref2.toElement,
+	      fromElement = _ref2.fromElement;
 	
 	  originalElement.style.opacity = '';
 	  toElement.style.opacity = '';
@@ -738,7 +747,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	}
 
-/***/ }
+/***/ })
 /******/ ])
 });
 ;

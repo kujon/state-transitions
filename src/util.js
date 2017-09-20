@@ -48,3 +48,11 @@ export function serializeNode(node, id) {
 
   return { id, rect, outerHTML };
 }
+
+export function removeNode(node) {
+  if ('remove' in Element.prototype) {
+    node.remove();
+  } else if (node.parentNode) {
+    node.parentNode.removeChild(node);
+  }
+}

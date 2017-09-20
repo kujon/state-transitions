@@ -2,7 +2,7 @@ import React from 'react';
 import { findDOMNode } from 'react-dom';
 import { forEach } from 'lodash';
 import elementCommunicator from './elementCommunicator';
-import { requestNextAnimationFrame, serializeNode, createClone } from './util';
+import { requestNextAnimationFrame, serializeNode, createClone, removeNode } from './util';
 
 
 export default class AnimateInOut extends React.Component {
@@ -35,7 +35,7 @@ export default class AnimateInOut extends React.Component {
 
       elementCommunicator.removeListener('animating-from', removeAnimatingElements);
 
-      transitionOutElement.remove();
+      removeNode(transitionOutElement);
     }
 
     transitionOutElement.addEventListener('animationend', animationEnd);

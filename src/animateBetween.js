@@ -1,6 +1,6 @@
 import { assign, forEach } from 'lodash';
 import elementCommunicator from './elementCommunicator';
-import { requestNextAnimationFrame, createClone } from './util';
+import { requestNextAnimationFrame, createClone, removeNode } from './util';
 import { OPACITY_MANAGED_BY_TWEEN } from './constants';
 
 // If an element and one of its subchildren is being transitioned, we don't want to animate both of them, else there will be duplicated artifacts. So we remove all child elements that are being animated. This pretty much has to be done with an event listener.
@@ -102,12 +102,12 @@ function animateElement({
 
   const removeAnimatingToElements = removeAnimatingElements(toClone);
   const removeAnimatingFromElements = removeAnimatingElements(fromClone);
-  const finish = () => container.remove();
+  const finish = () => removeNode(container);
 
   toClone.addEventListener('transitionend', function fadeOutToElement() {
     originalElement.style.opacity = '';
     toClone.removeEventListener('transitionend', fadeOutToElement);
-    fromClone.remove();
+    removeNode(fromClone);
 
     if (fadeOutDuration > 0.01) {
       // Fade the clone of the original element to the original element in the case that it has updated during the animation (off by default)
@@ -118,7 +118,7 @@ function animateElement({
         toClone.addEventListener('transitionend', function removeContainer() {
           // Probably not needed, best to be safe
           toClone.removeEventListener('transitionend', removeContainer);
-          toClone.remove();
+          removeNode(toClone);
 
           elementCommunicator.removeListener('animating-to', removeAnimatingToElements);
           elementCommunicator.removeListener('animating-from', removeAnimatingFromElements);
@@ -130,7 +130,7 @@ function animateElement({
       });
     } else {
       // Remove the clone of the original element, and this animation is complete
-      toClone.remove();
+      removeNode(toClone);
       finish();
     }
   });

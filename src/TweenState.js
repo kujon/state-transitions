@@ -1,7 +1,7 @@
 import React from 'react';
 import { findDOMNode } from 'react-dom';
 import { assign, pick } from 'lodash';
-import { serializeNode, createClone } from './util';
+import { serializeNode, createClone, removeNode } from './util';
 import { OPACITY_MANAGED_BY_TWEEN } from './constants';
 import { transitionTo, transitionFrom } from './itemTransition';
 
@@ -63,7 +63,7 @@ export default class TweenState extends React.Component {
     // Remove the placeholder element once everything is finished (setTimeout, for the moment, is guaranteed to be finished after the next component is mounted)
     setTimeout(() => {
       // Called after animations are initialised
-      placeholderElement.remove();
+      removeNode(placeholderElement);
     }, 0);
   }
 
